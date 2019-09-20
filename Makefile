@@ -1,5 +1,10 @@
 GRAALVM = ~/graalvm-ce-19.2.0.1
 
+all: build/wireguard-switcher
+
+clean:
+	-rm -rf build
+
 build/wireguard-switcher:
 	-mkdir build
 	lein clean

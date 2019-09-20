@@ -1,16 +1,18 @@
 # wireguard-switcher
 
-FIXME: description
+Linux system tray application to easily activate/deactivate wireguard endpoints with a popup menu.
+
+## Build
+
+    $ make
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Copy the `build/wireguard-switcher` binary to your system path
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar wireguard-switcher-0.1.0-standalone.jar [args]
+    $ wireguard-switcher
 
 ## Options
 
