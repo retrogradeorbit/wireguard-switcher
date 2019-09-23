@@ -2,6 +2,8 @@
 
 Linux system tray application to easily activate/deactivate wireguard endpoints with a popup menu.
 
+![Screenshot](screenshot-cropped.png)
+
 ## Build
 
     $ make
