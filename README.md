@@ -24,7 +24,6 @@ Copy the `wireguard-switcher` binary to your system path
 
 If you want it to startup on your desktop login, make a `~/.config/autostart/wireguard-switcher.desktop`. In it put the following content:
 
-    $ cat ~/.config/autostart/wireguard-switcher.desktop
     [Desktop Entry]
     Version=0.1
     Name=Wireguard Switcher
