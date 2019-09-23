@@ -12,9 +12,9 @@ Linux system tray application to easily activate/deactivate wireguard endpoints 
 
 ## Options
 
-   $ ./wireguard-switcher --help
-     -h, --help     Print the command line help
-     -v, --version  Print the version string and exit
+    $ ./wireguard-switcher --help
+    -h, --help     Print the command line help
+    -v, --version  Print the version string and exit
 
 ## Installation
 
