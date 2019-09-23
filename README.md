@@ -50,7 +50,7 @@ You can give a user complete root sudo access to _every_ command by appending th
 
     the_username ALL=(root) NOPASSWD: ALL
 
-Or if you only want to grand access to the above commands you can append:
+Or if you only want to grant access to _only the above commands_ you can append:
 
     the_username ALL=(root) NOPASSWD: /usr/bin/wg, /usr/sbin/service wg-quick@*
 
