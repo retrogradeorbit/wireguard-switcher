@@ -1,9 +1,9 @@
 GRAALVM = ~/graalvm-ce-19.2.0.1
 
-all: build/wireguard-switcher
+all: wireguard-switcher
 
 clean:
-	-rm -rf build target
+	-rm -rf build target wireguard-switcher
 
 target/uberjar/wireguard-switcher-0.1.0-SNAPSHOT-standalone.jar:
 	lein clean
@@ -33,6 +33,6 @@ native-binary: target/uberjar/wireguard-switcher-0.1.0-SNAPSHOT-standalone.jar
 		"-J-Xmx3g" \
 		-H:+TraceClassInitialization -H:+PrintClassInitialization
 
-binary:
+wireguard-switcher:
 	lein bin
 	cp target/default/wireguard-switcher-0.1.0-SNAPSHOT ./wireguard-switcher
