@@ -12,7 +12,8 @@
 (def cli-options
   [
    ["-h" "--help" "Print the command line help"]
-   ["-v" "--version" "Print the version string and exit"]])
+   ["-v" "--version" "Print the version string and exit"]
+   ["-n" "--no-quit" "Do not have a quit item in the menu (in case you keep quiting the applet when you really want to disable the wireguard connection)"]])
 
 (def resources
   {:dark (io/resource "lock.png")
@@ -73,7 +74,7 @@
     (doseq [[conn checkbox] menu-items]
       (.setChecked checkbox (boolean (state conn))))))
 
-(defn setup-switcher [items connected]
+(defn setup-switcher [items connected no-quit?]
   (when-let [tray (SystemTray/get)]
     (let [icon (:dark resources)]
       (doto tray
@@ -89,10 +90,12 @@
                                           (toggle-wireguard-state item))]
                                    (.setChecked i (boolean (connected item)))
                                    [item i])))]
-          (add-menu-separator menu)
-          (add-menu-item menu "Quit"
-                         (.shutdown tray)
-                         (System/exit 0))
+
+          (when-not no-quit?
+            (add-menu-separator menu)
+            (add-menu-item menu "Quit"
+                           (.shutdown tray)
+                           (System/exit 0)))
           {:tray tray
            :menu-items menu-items})))))
 
@@ -121,7 +124,8 @@
       :else
       (let [menu (setup-switcher
                   (read-wireguard-config-dir)
-                  (read-wireguard-state))]
+                  (read-wireguard-state)
+                  (:no-quit options))]
         (loop []
           (set-check-marks-from-state menu)
           (Thread/sleep 1000)

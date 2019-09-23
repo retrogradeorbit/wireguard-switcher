@@ -17,6 +17,7 @@ Linux system tray application to easily activate/deactivate wireguard endpoints 
     $ ./wireguard-switcher --help
     -h, --help     Print the command line help
     -v, --version  Print the version string and exit
+    -n, --no-quit  Do not have a quit item in the menu (in case you keep quiting the applet when you really want to disable the wireguard connection)
 
 ## Installation
 
