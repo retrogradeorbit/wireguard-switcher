@@ -7,6 +7,7 @@
                  [org.clojure/tools.cli "0.4.2"]
                  [com.dorkbox/SystemTray "3.17"]
                  ]
+  :plugins [[lein-bin "0.3.5"]]
   :main wireguard-switcher.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

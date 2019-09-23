@@ -9,25 +9,30 @@ target/uberjar/wireguard-switcher-0.1.0-SNAPSHOT-standalone.jar:
 	lein clean
 	lein uberjar
 
-build/wireguard-switcher: target/uberjar/wireguard-switcher-0.1.0-SNAPSHOT-standalone.jar
+analyse:
+	$(GRAALVM)/bin/java -agentlib:native-image-agent=config-output-dir=config-dir \
+		-jar target/uberjar/wireguard-switcher-0.1.0-SNAPSHOT-standalone.jar
+
+native-binary: target/uberjar/wireguard-switcher-0.1.0-SNAPSHOT-standalone.jar
 	-mkdir build
 	$(GRAALVM)/bin/native-image \
 		-jar target/uberjar/wireguard-switcher-0.1.0-SNAPSHOT-standalone.jar \
+		-Dsun.java2d.opengl=false \
 		-H:Name=build/wireguard-switcher \
 		-H:+ReportExceptionStackTraces \
 		-J-Dclojure.spec.skip-macros=true \
 		-J-Dclojure.compiler.direct-linking=true \
-		-H:ReflectionConfigurationFiles=graal-configs/reflection.json \
+		-H:ConfigurationFileDirectories=config-dir/ \
+		--initialize-at-run-time=dorkbox.util.jna.windows.User32,sun.java2d.opengl \
 		--initialize-at-build-time \
-		--initialize-at-run-time=dorkbox.util.jna,sun.java2d.opengl,sun.awt.X11.XToolkit,java.awt.Toolkit \
 		-H:Log=registerResource: \
 		--verbose \
 		--allow-incomplete-classpath \
 		--no-fallback \
 		--no-server \
 		"-J-Xmx3g" \
-		-H:+TraceClassInitialization -H:+PrintClassInitialization --debug-attach
+		-H:+TraceClassInitialization -H:+PrintClassInitialization
 
-analyse:
-	$(GRAALVM)/bin/java -agentlib:native-image-agent=config-output-dir=config-dir \
-		-jar target/uberjar/wireguard-switcher-0.1.0-SNAPSHOT-standalone.jar
+binary:
+	lein bin
+	cp target/default/wireguard-switcher-0.1.0-SNAPSHOT ./wireguard-switcher
