@@ -40,9 +40,9 @@ Then logout and log back in again
 
 The user running the `wireguard-switcher` will need passwordless `sudo` access to the following commands:
 
-    - sudo wg
-    - sudo service wg-quick@connection start
-    - sudo service wg-quick@connection stop
+- sudo wg
+- sudo service wg-quick@connection start
+- sudo service wg-quick@connection stop
 
 where `connection` is the name of the connection
 
@@ -57,6 +57,12 @@ Or if you only want to grand access to the above commands you can append:
 ## Operation
 
 On startup, the systray application reads the contents of the `/etc/wireguard` directory. For each file it finds matching `*.conf` is makes a menu entry for that connection.
+
+## Bugs
+
+GraalVM's native-image presently doesn't work for swing/awt apps. See: https://github.com/oracle/graal/issues/1327
+
+So I am using `lein-bin` to build a single executable for distribution. This requires that the machine you are installing the application on have a working Java JVM installed.
 
 ## License
 
